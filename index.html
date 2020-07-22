@@ -16,6 +16,9 @@
   <body>
     <div id="container"></div>
     <script>
+      var numberOfImages = 3;
+      var imageExtension = '.png'
+
       var width = window.innerWidth;
       var height = window.innerHeight;
 
@@ -32,8 +35,7 @@
       var kmg = [];
       var groups = [];
 
-      var m=3;
-      for (var i=0; i<m; i++)
+      for (var i=0; i<numberOfImages; i++)
       {
         kmg[i] = new Konva.Image();
         groups[i] = new Konva.Group({
@@ -55,7 +57,7 @@
           kmg[n].image(images[n]);
           layer.draw();
         }.bind(null, i);
-        images[i].src = i + '.jpg';
+        images[i].src = i + imageExtension;
       }
     </script>
   </body>
