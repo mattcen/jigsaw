@@ -8,8 +8,9 @@
       body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: auto;
         background-color: #f0f0f0;
+        height: 100%
       }
       #buttons {
         position: absolute;
@@ -34,8 +35,11 @@
       var imageExtension = '.jpg'
       var layers = [ "b", "a" ];
 
-      var width = window.innerWidth;
-      var height = window.innerHeight;
+      var minWidth = 2000;
+      var minHeight = 700;
+
+      var width = (minWidth > window.innerWidth ? minWidth : window.innerWidth);
+      var height = (minHeight > window.innerHeight ? minHeight : window.innerHeight);
 
       var stage = new Konva.Stage({
         container: 'container',
