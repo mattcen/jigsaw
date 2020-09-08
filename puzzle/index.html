@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Puzzle</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      var numberOfImages = 10;
+      var imageExtension = '.jpg'
+
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+      });
+
+      var layer = new Konva.Layer();
+      stage.add(layer);
+
+
+      var images = [];
+      var kmg = [];
+      var groups = [];
+      var transforms = [];
+      var rotations = [ 4.038710865878331, 34.06285914575347, 81.7, -133.68889071029807, -133.21018989505308, -124.99610582774154, 151.4795977170436, 82.60303305416427, 55.268879254710306, -129.2391996175458 ];
+      var zIndexes = [ 16, 19, 18, 17, 15, 12, 14, 9, 10, 11 ]
+      var borderFactor = 0.2;
+
+      function randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      for (var i=0; i<numberOfImages; i++)
+      {
+        kmg[i] = new Konva.Image();
+        groups[i] = new Konva.Group({
+          x: randomIntFromInterval(width * borderFactor, width - (width * borderFactor)),
+          y: randomIntFromInterval(height * borderFactor, height - (height * borderFactor)),
+          draggable: true,
+        });
+
+        transforms[i] = new Konva.Transformer();
+        transforms[i].resizeEnabled(false);
+        layer.add(transforms[i])
+        transforms[i].nodes([groups[i]]);
+        transforms[i].rotation(rotations[i]);
+        groups[i].rotation(rotations[i]);
+
+        /*
+        groups[i].on('click', function () {
+          this.moveToTop();
+          layer.draw();
+        });
+
+        transforms[i].on('click', function () {
+          this.moveToTop();
+          layer.draw();
+        });
+        */
+
+        layer.add(groups[i]);
+        groups[i].add(kmg[i]);
+        //groups[i].children[0].scaleX(0.2);
+        //groups[i].children[0].scaleY(0.2);
+
+        images[i] = new Image();
+        images[i].onload = function (n) {
+          kmg[n].image(images[n]);
+          layer.draw();
+        }.bind(null, i);
+        images[i].src = i + imageExtension;
+      }
+      for (var i=0; i<numberOfImages; i++)
+      {
+        groups[i].zIndex(zIndexes[i]);
+        layer.draw();
+      }
+    </script>
+  </body>
+</html>

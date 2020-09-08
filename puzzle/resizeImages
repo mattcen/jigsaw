@@ -1,0 +1,2 @@
+#!/bin/bash
+for f in big/*.jpg; do gm convert -resize 20% "$f" "${f##*/}"; done
