@@ -8,8 +8,9 @@
       body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: auto;
         background-color: #f0f0f0;
+        height: 100%
       }
     </style>
   </head>
@@ -19,8 +20,11 @@
       var numberOfImages = 10;
       var imageExtension = '.jpg'
 
-      var width = window.innerWidth;
-      var height = window.innerHeight;
+      var minWidth = 1500;
+      var minHeight = 1500;
+
+      var width = (minWidth > window.innerWidth ? minWidth : window.innerWidth);
+      var height = (minHeight > window.innerHeight ? minHeight : window.innerHeight);
 
       var stage = new Konva.Stage({
         container: 'container',
@@ -48,8 +52,8 @@
       {
         kmg[i] = new Konva.Image();
         groups[i] = new Konva.Group({
-          x: randomIntFromInterval(width * borderFactor, width - (width * borderFactor)),
-          y: randomIntFromInterval(height * borderFactor, height - (height * borderFactor)),
+          x: randomIntFromInterval(window.innerWidth * borderFactor, window.innerWidth - (window.innerWidth * borderFactor)),
+          y: randomIntFromInterval(window.innerHeight * borderFactor, window.innerHeight - (window.innerHeight * borderFactor)),
           draggable: true,
         });
 
@@ -60,7 +64,6 @@
         transforms[i].rotation(rotations[i]);
         groups[i].rotation(rotations[i]);
 
-        /*
         groups[i].on('click', function () {
           this.moveToTop();
           layer.draw();
@@ -70,7 +73,6 @@
           this.moveToTop();
           layer.draw();
         });
-        */
 
         layer.add(groups[i]);
         groups[i].add(kmg[i]);
