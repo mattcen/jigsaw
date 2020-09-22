@@ -39,9 +39,8 @@
       var images = [];
       var kmg = [];
       var groups = [];
-      var transforms = [];
       var rotations = [ 4.038710865878331, 34.06285914575347, 81.7, -133.68889071029807, -133.21018989505308, -124.99610582774154, 151.4795977170436, 82.60303305416427, 55.268879254710306, -129.2391996175458 ];
-      var zIndexes = [ 16, 19, 18, 17, 15, 12, 14, 9, 10, 11 ]
+      var zIndexes = [ 7, 9, 8, 7, 6, 3, 5, 0, 1, 2 ];
       var borderFactor = 0.2;
 
       function randomIntFromInterval(min, max) {
@@ -57,11 +56,6 @@
           draggable: true,
         });
 
-        transforms[i] = new Konva.Transformer();
-        transforms[i].resizeEnabled(false);
-        layer.add(transforms[i])
-        transforms[i].nodes([groups[i]]);
-        transforms[i].rotation(rotations[i]);
         groups[i].rotation(rotations[i]);
 
         layer.add(groups[i]);
