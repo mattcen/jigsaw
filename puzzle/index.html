@@ -64,16 +64,6 @@
         transforms[i].rotation(rotations[i]);
         groups[i].rotation(rotations[i]);
 
-        groups[i].on('click', function () {
-          this.moveToTop();
-          layer.draw();
-        });
-
-        transforms[i].on('click', function () {
-          this.moveToTop();
-          layer.draw();
-        });
-
         layer.add(groups[i]);
         groups[i].add(kmg[i]);
         //groups[i].children[0].scaleX(0.2);
